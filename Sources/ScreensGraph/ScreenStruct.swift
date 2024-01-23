@@ -18,6 +18,7 @@ public enum ScreenStruct: Codable, JSONEncodable, Hashable {
     case typeScreenImageTitleSubtitlePicker(ScreenImageTitleSubtitlePicker)
     case typeScreenImageTitleSubtitles(ScreenImageTitleSubtitles)
     case typeScreenProgressBarTitle(ScreenProgressBarTitle)
+    case typeScreenScalableImageTextSelection(ScreenScalableImageTextSelection)
     case typeScreenSlider(ScreenSlider)
     case typeScreenTableMultipleSelection(ScreenTableMultipleSelection)
     case typeScreenTableSingleSelection(ScreenTableSingleSelection)
@@ -42,6 +43,8 @@ public enum ScreenStruct: Codable, JSONEncodable, Hashable {
         case .typeScreenImageTitleSubtitles(let value):
             try container.encode(value)
         case .typeScreenProgressBarTitle(let value):
+            try container.encode(value)
+        case .typeScreenScalableImageTextSelection(let value):
             try container.encode(value)
         case .typeScreenSlider(let value):
             try container.encode(value)
@@ -78,6 +81,8 @@ public enum ScreenStruct: Codable, JSONEncodable, Hashable {
             self = .typeScreenImageTitleSubtitles(value)
         } else if let value = try? container.decode(ScreenProgressBarTitle.self) {
             self = .typeScreenProgressBarTitle(value)
+        } else if let value = try? container.decode(ScreenScalableImageTextSelection.self) {
+            self = .typeScreenScalableImageTextSelection(value)
         } else if let value = try? container.decode(ScreenSlider.self) {
             self = .typeScreenSlider(value)
         } else if let value = try? container.decode(ScreenTableMultipleSelection.self) {

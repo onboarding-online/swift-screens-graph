@@ -27,4 +27,5 @@ public enum ScreenType: String, Codable, CaseIterable {
     case screenImageTitleSubtitlePicker = "ScreenImageTitleSubtitlePicker"
     case screenImageTitleSubtitleMultipleSelectionList = "ScreenImageTitleSubtitleMultipleSelectionList"
     case screenTooltipPermissions = "ScreenTooltipPermissions"
+    case screenScalableImageTextSelection = "ScreenScalableImageTextSelection"
 }
