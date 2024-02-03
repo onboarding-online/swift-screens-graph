@@ -10,28 +10,29 @@ import Foundation
 import AnyCodable
 #endif
 
-/** Footer */
-public struct Footer: Codable, JSONEncodable, Hashable {
-
-    public var button1: Button?
-    public var button2: Button?
-
-    public init(button1: Button? = nil, button2: Button? = nil) {
-        self.button1 = button1
-        self.button2 = button2
-    }
-
-    public enum CodingKeys: String, CodingKey, CaseIterable {
-        case button1
-        case button2
-    }
-
-    // Encodable protocol methods
+public enum Footer: Codable, JSONEncodable, Hashable {
+    case typeBasicFooter(BasicFooter)
+    case typePaywallFooter(PaywallFooter)
 
     public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(button1, forKey: .button1)
-        try container.encodeIfPresent(button2, forKey: .button2)
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .typeBasicFooter(let value):
+            try container.encode(value)
+        case .typePaywallFooter(let value):
+            try container.encode(value)
+        }
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let value = try? container.decode(BasicFooter.self) {
+            self = .typeBasicFooter(value)
+        } else if let value = try? container.decode(PaywallFooter.self) {
+            self = .typePaywallFooter(value)
+        } else {
+            throw DecodingError.typeMismatch(Self.Type.self, .init(codingPath: decoder.codingPath, debugDescription: "Unable to decode instance of Footer"))
+        }
     }
 }
 
