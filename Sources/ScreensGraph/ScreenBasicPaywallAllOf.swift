@@ -14,6 +14,8 @@ import AnyCodable
 public struct ScreenBasicPaywallAllOf: Codable, JSONEncodable, Hashable {
 
     public var screenBasicPaywall: String
+    public var navigationBar: PaywallNavigationBar?
+    public var footer: PaywallFooter?
     public var title: Text
     public var subtitle: Text
     public var image: Image?
@@ -22,8 +24,10 @@ public struct ScreenBasicPaywallAllOf: Codable, JSONEncodable, Hashable {
     public var subscriptions: SubscriptionList
     public var styles: ScreenBasicPaywallBlock
 
-    public init(screenBasicPaywall: String, title: Text, subtitle: Text, image: Image? = nil, video: Video? = nil, list: RegularList, subscriptions: SubscriptionList, styles: ScreenBasicPaywallBlock) {
+    public init(screenBasicPaywall: String, navigationBar: PaywallNavigationBar? = nil, footer: PaywallFooter? = nil, title: Text, subtitle: Text, image: Image? = nil, video: Video? = nil, list: RegularList, subscriptions: SubscriptionList, styles: ScreenBasicPaywallBlock) {
         self.screenBasicPaywall = screenBasicPaywall
+        self.navigationBar = navigationBar
+        self.footer = footer
         self.title = title
         self.subtitle = subtitle
         self.image = image
@@ -35,6 +39,8 @@ public struct ScreenBasicPaywallAllOf: Codable, JSONEncodable, Hashable {
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case screenBasicPaywall
+        case navigationBar
+        case footer
         case title
         case subtitle
         case image
@@ -49,6 +55,8 @@ public struct ScreenBasicPaywallAllOf: Codable, JSONEncodable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(screenBasicPaywall, forKey: .screenBasicPaywall)
+        try container.encodeIfPresent(navigationBar, forKey: .navigationBar)
+        try container.encodeIfPresent(footer, forKey: .footer)
         try container.encode(title, forKey: .title)
         try container.encode(subtitle, forKey: .subtitle)
         try container.encodeIfPresent(image, forKey: .image)

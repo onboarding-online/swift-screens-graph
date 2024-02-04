@@ -10,30 +10,32 @@ import Foundation
 import AnyCodable
 #endif
 
-/** Navigation bar */
-public enum NavigationBar: Codable, JSONEncodable, Hashable {
-    case typeBasicNavigationBar(BasicNavigationBar)
-    case typePaywallNavigationBar(PaywallNavigationBar)
+/** Basic navigation bar */
+public struct NavigationBar: Codable, JSONEncodable, Hashable {
 
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case .typeBasicNavigationBar(let value):
-            try container.encode(value)
-        case .typePaywallNavigationBar(let value):
-            try container.encode(value)
-        }
+    public var back: Button?
+    public var skip: Button?
+    public var pageIndicator: PageIndicator?
+
+    public init(back: Button? = nil, skip: Button? = nil, pageIndicator: PageIndicator? = nil) {
+        self.back = back
+        self.skip = skip
+        self.pageIndicator = pageIndicator
     }
 
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = try? container.decode(BasicNavigationBar.self) {
-            self = .typeBasicNavigationBar(value)
-        } else if let value = try? container.decode(PaywallNavigationBar.self) {
-            self = .typePaywallNavigationBar(value)
-        } else {
-            throw DecodingError.typeMismatch(Self.Type.self, .init(codingPath: decoder.codingPath, debugDescription: "Unable to decode instance of NavigationBar"))
-        }
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case back
+        case skip
+        case pageIndicator
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(back, forKey: .back)
+        try container.encodeIfPresent(skip, forKey: .skip)
+        try container.encodeIfPresent(pageIndicator, forKey: .pageIndicator)
     }
 }
 

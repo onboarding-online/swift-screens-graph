@@ -12,8 +12,8 @@ import AnyCodable
 
 public struct ScreenBasicPaywall: Codable, JSONEncodable, Hashable {
 
-    public var navigationBar: NavigationBar
-    public var footer: Footer
+    public var navigationBar: PaywallNavigationBar
+    public var footer: PaywallFooter
     public var styles: ScreenBasicPaywallBlock
     public var permission: RequestPermission?
     public var timer: ScreenTimer?
@@ -27,7 +27,7 @@ public struct ScreenBasicPaywall: Codable, JSONEncodable, Hashable {
     public var list: RegularList
     public var subscriptions: SubscriptionList
 
-    public init(navigationBar: NavigationBar, footer: Footer, styles: ScreenBasicPaywallBlock, permission: RequestPermission?, timer: ScreenTimer?, animationEnabled: Bool, useLocalAssetsIfAvailable: Bool, screenBasicPaywall: String, title: Text, subtitle: Text, image: Image? = nil, video: Video? = nil, list: RegularList, subscriptions: SubscriptionList) {
+    public init(navigationBar: PaywallNavigationBar, footer: PaywallFooter, styles: ScreenBasicPaywallBlock, permission: RequestPermission?, timer: ScreenTimer?, animationEnabled: Bool, useLocalAssetsIfAvailable: Bool, screenBasicPaywall: String, title: Text, subtitle: Text, image: Image? = nil, video: Video? = nil, list: RegularList, subscriptions: SubscriptionList) {
         self.navigationBar = navigationBar
         self.footer = footer
         self.styles = styles
