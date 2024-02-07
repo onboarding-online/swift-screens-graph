@@ -18,15 +18,17 @@ public struct ItemTypeSubscription: Codable, JSONEncodable, Hashable {
     public var period: Text
     public var price: Text
     public var description: Text
+    public var badge: Badge?
     public var box: Box
     public var weight: Double
 
-    public init(subscriptionId: String, checkBox: CheckBox, period: Text, price: Text, description: Text, box: Box, weight: Double) {
+    public init(subscriptionId: String, checkBox: CheckBox, period: Text, price: Text, description: Text, badge: Badge? = nil, box: Box, weight: Double) {
         self.subscriptionId = subscriptionId
         self.checkBox = checkBox
         self.period = period
         self.price = price
         self.description = description
+        self.badge = badge
         self.box = box
         self.weight = weight
     }
@@ -37,6 +39,7 @@ public struct ItemTypeSubscription: Codable, JSONEncodable, Hashable {
         case period
         case price
         case description
+        case badge
         case box
         case weight
     }
@@ -50,6 +53,7 @@ public struct ItemTypeSubscription: Codable, JSONEncodable, Hashable {
         try container.encode(period, forKey: .period)
         try container.encode(price, forKey: .price)
         try container.encode(description, forKey: .description)
+        try container.encodeIfPresent(badge, forKey: .badge)
         try container.encode(box, forKey: .box)
         try container.encode(weight, forKey: .weight)
     }

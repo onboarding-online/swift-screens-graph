@@ -25,9 +25,12 @@ public struct ScreenBasicPaywall: Codable, JSONEncodable, Hashable {
     public var image: Image?
     public var video: Video?
     public var list: RegularList
+    public var loader: Loader?
+    /** Purchase flags */
+    public var flags: [PurchaseFlag]
     public var subscriptions: SubscriptionList
 
-    public init(navigationBar: PaywallNavigationBar, footer: PaywallFooter, styles: ScreenBasicPaywallBlock, permission: RequestPermission?, timer: ScreenTimer?, animationEnabled: Bool, useLocalAssetsIfAvailable: Bool, screenBasicPaywall: String, title: Text, subtitle: Text, image: Image? = nil, video: Video? = nil, list: RegularList, subscriptions: SubscriptionList) {
+    public init(navigationBar: PaywallNavigationBar, footer: PaywallFooter, styles: ScreenBasicPaywallBlock, permission: RequestPermission?, timer: ScreenTimer?, animationEnabled: Bool, useLocalAssetsIfAvailable: Bool, screenBasicPaywall: String, title: Text, subtitle: Text, image: Image? = nil, video: Video? = nil, list: RegularList, loader: Loader? = nil, flags: [PurchaseFlag], subscriptions: SubscriptionList) {
         self.navigationBar = navigationBar
         self.footer = footer
         self.styles = styles
@@ -41,6 +44,8 @@ public struct ScreenBasicPaywall: Codable, JSONEncodable, Hashable {
         self.image = image
         self.video = video
         self.list = list
+        self.loader = loader
+        self.flags = flags
         self.subscriptions = subscriptions
     }
 
@@ -58,6 +63,8 @@ public struct ScreenBasicPaywall: Codable, JSONEncodable, Hashable {
         case image
         case video
         case list
+        case loader
+        case flags
         case subscriptions
     }
 
@@ -78,6 +85,8 @@ public struct ScreenBasicPaywall: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(image, forKey: .image)
         try container.encodeIfPresent(video, forKey: .video)
         try container.encode(list, forKey: .list)
+        try container.encodeIfPresent(loader, forKey: .loader)
+        try container.encode(flags, forKey: .flags)
         try container.encode(subscriptions, forKey: .subscriptions)
     }
 }
