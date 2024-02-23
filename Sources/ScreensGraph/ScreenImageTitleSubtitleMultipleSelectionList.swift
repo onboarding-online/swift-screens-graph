@@ -21,11 +21,13 @@ public struct ScreenImageTitleSubtitleMultipleSelectionList: Codable, JSONEncoda
     public var useLocalAssetsIfAvailable: Bool
     public var imageTitleSubtitleMultipleSelectionListDescription: String
     public var image: Image
+    /** Defines the scale of the image in percentage */
+    public var imageScale: Double?
     public var title: Text
     public var subtitle: Text
     public var list: MultipleSelectionList
 
-    public init(navigationBar: NavigationBar, footer: Footer, styles: BasicScreenBlock, permission: RequestPermission?, timer: ScreenTimer?, animationEnabled: Bool, useLocalAssetsIfAvailable: Bool, imageTitleSubtitleMultipleSelectionListDescription: String, image: Image, title: Text, subtitle: Text, list: MultipleSelectionList) {
+    public init(navigationBar: NavigationBar, footer: Footer, styles: BasicScreenBlock, permission: RequestPermission?, timer: ScreenTimer?, animationEnabled: Bool, useLocalAssetsIfAvailable: Bool, imageTitleSubtitleMultipleSelectionListDescription: String, image: Image, imageScale: Double? = nil, title: Text, subtitle: Text, list: MultipleSelectionList) {
         self.navigationBar = navigationBar
         self.footer = footer
         self.styles = styles
@@ -35,6 +37,7 @@ public struct ScreenImageTitleSubtitleMultipleSelectionList: Codable, JSONEncoda
         self.useLocalAssetsIfAvailable = useLocalAssetsIfAvailable
         self.imageTitleSubtitleMultipleSelectionListDescription = imageTitleSubtitleMultipleSelectionListDescription
         self.image = image
+        self.imageScale = imageScale
         self.title = title
         self.subtitle = subtitle
         self.list = list
@@ -50,6 +53,7 @@ public struct ScreenImageTitleSubtitleMultipleSelectionList: Codable, JSONEncoda
         case useLocalAssetsIfAvailable
         case imageTitleSubtitleMultipleSelectionListDescription
         case image
+        case imageScale
         case title
         case subtitle
         case list
@@ -68,6 +72,7 @@ public struct ScreenImageTitleSubtitleMultipleSelectionList: Codable, JSONEncoda
         try container.encode(useLocalAssetsIfAvailable, forKey: .useLocalAssetsIfAvailable)
         try container.encode(imageTitleSubtitleMultipleSelectionListDescription, forKey: .imageTitleSubtitleMultipleSelectionListDescription)
         try container.encode(image, forKey: .image)
+        try container.encodeIfPresent(imageScale, forKey: .imageScale)
         try container.encode(title, forKey: .title)
         try container.encode(subtitle, forKey: .subtitle)
         try container.encode(list, forKey: .list)

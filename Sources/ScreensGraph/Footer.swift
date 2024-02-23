@@ -15,15 +15,21 @@ public struct Footer: Codable, JSONEncodable, Hashable {
 
     public var button1: Button?
     public var button2: Button?
+    public var kind: BasicFooterKind?
+    public var styles: BasicFooterBlock?
 
-    public init(button1: Button? = nil, button2: Button? = nil) {
+    public init(button1: Button? = nil, button2: Button? = nil, kind: BasicFooterKind? = nil, styles: BasicFooterBlock? = nil) {
         self.button1 = button1
         self.button2 = button2
+        self.kind = kind
+        self.styles = styles
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case button1
         case button2
+        case kind
+        case styles
     }
 
     // Encodable protocol methods
@@ -32,6 +38,8 @@ public struct Footer: Codable, JSONEncodable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(button1, forKey: .button1)
         try container.encodeIfPresent(button2, forKey: .button2)
+        try container.encodeIfPresent(kind, forKey: .kind)
+        try container.encodeIfPresent(styles, forKey: .styles)
     }
 }
 

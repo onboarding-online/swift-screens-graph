@@ -13,6 +13,7 @@ import AnyCodable
 /** Screen struct */
 public enum ScreenStruct: Codable, JSONEncodable, Hashable {
     case typeCustomScreen(CustomScreen)
+    case typeScreenBasicPaywall(ScreenBasicPaywall)
     case typeScreenImageTitleSubtitleList(ScreenImageTitleSubtitleList)
     case typeScreenImageTitleSubtitleMultipleSelectionList(ScreenImageTitleSubtitleMultipleSelectionList)
     case typeScreenImageTitleSubtitlePicker(ScreenImageTitleSubtitlePicker)
@@ -32,6 +33,8 @@ public enum ScreenStruct: Codable, JSONEncodable, Hashable {
         var container = encoder.singleValueContainer()
         switch self {
         case .typeCustomScreen(let value):
+            try container.encode(value)
+        case .typeScreenBasicPaywall(let value):
             try container.encode(value)
         case .typeScreenImageTitleSubtitleList(let value):
             try container.encode(value)
@@ -68,6 +71,8 @@ public enum ScreenStruct: Codable, JSONEncodable, Hashable {
         let container = try decoder.singleValueContainer()
         if let value = try? container.decode(CustomScreen.self) {
             self = .typeCustomScreen(value)
+        } else if let value = try? container.decode(ScreenBasicPaywall.self) {
+            self = .typeScreenBasicPaywall(value)
         } else if let value = try? container.decode(ScreenImageTitleSubtitleList.self) {
             self = .typeScreenImageTitleSubtitleList(value)
         } else if let value = try? container.decode(ScreenImageTitleSubtitleMultipleSelectionList.self) {

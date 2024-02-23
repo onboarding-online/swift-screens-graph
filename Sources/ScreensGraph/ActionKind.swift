@@ -12,6 +12,7 @@ import AnyCodable
 
 /** Describe of action kind */
 public enum ActionKind: String, Codable, CaseIterable {
+    case purchase = "Purchase"
     case next = "Next"
     case back = "Back"
     case finish = "Finish"

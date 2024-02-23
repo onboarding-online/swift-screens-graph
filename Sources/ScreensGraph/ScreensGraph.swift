@@ -16,6 +16,8 @@ public struct ScreensGraph: Codable, JSONEncodable, Hashable {
     public var defaultLanguage: Language
     /** The list of languages */
     public var languages: [Language]
+    /** Schema version in semver format */
+    public var schemaVersion: String?
     /** First screen id */
     public var launchScreenId: String
     /** All screens nodes dictionary */
@@ -23,9 +25,10 @@ public struct ScreensGraph: Codable, JSONEncodable, Hashable {
     /** Metadata dictionary */
     public var metadata: [String: String]
 
-    public init(defaultLanguage: Language, languages: [Language], launchScreenId: String, screens: [String: Screen], metadata: [String: String]) {
+    public init(defaultLanguage: Language, languages: [Language], schemaVersion: String? = nil, launchScreenId: String, screens: [String: Screen], metadata: [String: String]) {
         self.defaultLanguage = defaultLanguage
         self.languages = languages
+        self.schemaVersion = schemaVersion
         self.launchScreenId = launchScreenId
         self.screens = screens
         self.metadata = metadata
@@ -34,6 +37,7 @@ public struct ScreensGraph: Codable, JSONEncodable, Hashable {
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case defaultLanguage
         case languages
+        case schemaVersion
         case launchScreenId
         case screens
         case metadata
@@ -45,6 +49,7 @@ public struct ScreensGraph: Codable, JSONEncodable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(defaultLanguage, forKey: .defaultLanguage)
         try container.encode(languages, forKey: .languages)
+        try container.encodeIfPresent(schemaVersion, forKey: .schemaVersion)
         try container.encode(launchScreenId, forKey: .launchScreenId)
         try container.encode(screens, forKey: .screens)
         try container.encode(metadata, forKey: .metadata)

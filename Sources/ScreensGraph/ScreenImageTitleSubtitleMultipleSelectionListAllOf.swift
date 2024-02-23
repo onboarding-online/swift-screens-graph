@@ -15,13 +15,16 @@ public struct ScreenImageTitleSubtitleMultipleSelectionListAllOf: Codable, JSONE
 
     public var imageTitleSubtitleMultipleSelectionListDescription: String
     public var image: Image
+    /** Defines the scale of the image in percentage */
+    public var imageScale: Double?
     public var title: Text
     public var subtitle: Text
     public var list: MultipleSelectionList
 
-    public init(imageTitleSubtitleMultipleSelectionListDescription: String, image: Image, title: Text, subtitle: Text, list: MultipleSelectionList) {
+    public init(imageTitleSubtitleMultipleSelectionListDescription: String, image: Image, imageScale: Double? = nil, title: Text, subtitle: Text, list: MultipleSelectionList) {
         self.imageTitleSubtitleMultipleSelectionListDescription = imageTitleSubtitleMultipleSelectionListDescription
         self.image = image
+        self.imageScale = imageScale
         self.title = title
         self.subtitle = subtitle
         self.list = list
@@ -30,6 +33,7 @@ public struct ScreenImageTitleSubtitleMultipleSelectionListAllOf: Codable, JSONE
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case imageTitleSubtitleMultipleSelectionListDescription
         case image
+        case imageScale
         case title
         case subtitle
         case list
@@ -41,6 +45,7 @@ public struct ScreenImageTitleSubtitleMultipleSelectionListAllOf: Codable, JSONE
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(imageTitleSubtitleMultipleSelectionListDescription, forKey: .imageTitleSubtitleMultipleSelectionListDescription)
         try container.encode(image, forKey: .image)
+        try container.encodeIfPresent(imageScale, forKey: .imageScale)
         try container.encode(title, forKey: .title)
         try container.encode(subtitle, forKey: .subtitle)
         try container.encode(list, forKey: .list)
