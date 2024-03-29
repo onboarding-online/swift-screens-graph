@@ -17,15 +17,19 @@ public struct FieldBlock: Codable, JSONEncodable, Hashable {
     public var backgroundColor: String?
     /** Border color for field */
     public var borderColor: String?
+    /** Entered text color for field */
+    public var enteredTextColor: String?
 
-    public init(backgroundColor: String? = nil, borderColor: String? = nil) {
+    public init(backgroundColor: String? = nil, borderColor: String? = nil, enteredTextColor: String? = nil) {
         self.backgroundColor = backgroundColor
         self.borderColor = borderColor
+        self.enteredTextColor = enteredTextColor
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case backgroundColor
         case borderColor
+        case enteredTextColor
     }
 
     // Encodable protocol methods
@@ -34,6 +38,7 @@ public struct FieldBlock: Codable, JSONEncodable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(backgroundColor, forKey: .backgroundColor)
         try container.encodeIfPresent(borderColor, forKey: .borderColor)
+        try container.encodeIfPresent(enteredTextColor, forKey: .enteredTextColor)
     }
 }
 

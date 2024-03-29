@@ -17,18 +17,24 @@ public struct ProgressBarItem: Codable, JSONEncodable, Hashable {
     public var valueFrom: Int
     /** Section display end */
     public var valueTo: Int
+    public var timer: ElementTimer?
     public var content: ProgressBarItemContent
+    public var styles: ProgressBarItemBlock?
 
-    public init(valueFrom: Int, valueTo: Int, content: ProgressBarItemContent) {
+    public init(valueFrom: Int, valueTo: Int, timer: ElementTimer? = nil, content: ProgressBarItemContent, styles: ProgressBarItemBlock? = nil) {
         self.valueFrom = valueFrom
         self.valueTo = valueTo
+        self.timer = timer
         self.content = content
+        self.styles = styles
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case valueFrom
         case valueTo
+        case timer
         case content
+        case styles
     }
 
     // Encodable protocol methods
@@ -37,7 +43,9 @@ public struct ProgressBarItem: Codable, JSONEncodable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(valueFrom, forKey: .valueFrom)
         try container.encode(valueTo, forKey: .valueTo)
+        try container.encodeIfPresent(timer, forKey: .timer)
         try container.encode(content, forKey: .content)
+        try container.encodeIfPresent(styles, forKey: .styles)
     }
 }
 
