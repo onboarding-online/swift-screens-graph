@@ -16,17 +16,20 @@ public struct ScreenProgressBarTitleAllOf: Codable, JSONEncodable, Hashable {
     public var progressBarTitleDescription: String
     public var progressBar: ProgressBar
     public var title: Text
+    public var subtitle: Text?
 
-    public init(progressBarTitleDescription: String, progressBar: ProgressBar, title: Text) {
+    public init(progressBarTitleDescription: String, progressBar: ProgressBar, title: Text, subtitle: Text? = nil) {
         self.progressBarTitleDescription = progressBarTitleDescription
         self.progressBar = progressBar
         self.title = title
+        self.subtitle = subtitle
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case progressBarTitleDescription
         case progressBar
         case title
+        case subtitle
     }
 
     // Encodable protocol methods
@@ -36,6 +39,7 @@ public struct ScreenProgressBarTitleAllOf: Codable, JSONEncodable, Hashable {
         try container.encode(progressBarTitleDescription, forKey: .progressBarTitleDescription)
         try container.encode(progressBar, forKey: .progressBar)
         try container.encode(title, forKey: .title)
+        try container.encodeIfPresent(subtitle, forKey: .subtitle)
     }
 }
 

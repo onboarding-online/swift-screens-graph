@@ -13,6 +13,7 @@ import AnyCodable
 /** Subscriptions list element */
 public struct SubscriptionList: Codable, JSONEncodable, Hashable {
 
+    public var subscriptionViewKind: SubscriptionViewKind?
     public var itemType: SubscriptionListItemType
     /** Item rows */
     public var items: [ItemTypeSubscription]
@@ -20,7 +21,8 @@ public struct SubscriptionList: Codable, JSONEncodable, Hashable {
     public var selectedBlock: SelectedSubscriptionListItemBlock
     public var box: Box
 
-    public init(itemType: SubscriptionListItemType, items: [ItemTypeSubscription], styles: SubscriptionListBlock, selectedBlock: SelectedSubscriptionListItemBlock, box: Box) {
+    public init(subscriptionViewKind: SubscriptionViewKind? = nil, itemType: SubscriptionListItemType, items: [ItemTypeSubscription], styles: SubscriptionListBlock, selectedBlock: SelectedSubscriptionListItemBlock, box: Box) {
+        self.subscriptionViewKind = subscriptionViewKind
         self.itemType = itemType
         self.items = items
         self.styles = styles
@@ -29,6 +31,7 @@ public struct SubscriptionList: Codable, JSONEncodable, Hashable {
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
+        case subscriptionViewKind
         case itemType
         case items
         case styles
@@ -40,6 +43,7 @@ public struct SubscriptionList: Codable, JSONEncodable, Hashable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(subscriptionViewKind, forKey: .subscriptionViewKind)
         try container.encode(itemType, forKey: .itemType)
         try container.encode(items, forKey: .items)
         try container.encode(styles, forKey: .styles)

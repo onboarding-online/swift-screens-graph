@@ -16,15 +16,18 @@ public struct ElementTimer: Codable, JSONEncodable, Hashable {
     /** Duration to show an element in seconds */
     public var duration: Int
     public var action: Action
+    public var unit: TimerUnit?
 
-    public init(duration: Int, action: Action) {
+    public init(duration: Int, action: Action, unit: TimerUnit? = nil) {
         self.duration = duration
         self.action = action
+        self.unit = unit
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case duration
         case action
+        case unit
     }
 
     // Encodable protocol methods
@@ -33,6 +36,7 @@ public struct ElementTimer: Codable, JSONEncodable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(duration, forKey: .duration)
         try container.encode(action, forKey: .action)
+        try container.encodeIfPresent(unit, forKey: .unit)
     }
 }
 

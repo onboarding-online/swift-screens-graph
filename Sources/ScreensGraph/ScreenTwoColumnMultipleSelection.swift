@@ -20,11 +20,12 @@ public struct ScreenTwoColumnMultipleSelection: Codable, JSONEncodable, Hashable
     public var animationEnabled: Bool
     public var useLocalAssetsIfAvailable: Bool
     public var twoColumnMultipleSelectionDescription: String
+    public var media: Media?
     public var title: Text
     public var subtitle: Text
     public var list: TwoColumnMultipleSelectionList
 
-    public init(navigationBar: NavigationBar, footer: Footer, styles: BasicScreenBlock, permission: RequestPermission?, timer: ScreenTimer?, animationEnabled: Bool, useLocalAssetsIfAvailable: Bool, twoColumnMultipleSelectionDescription: String, title: Text, subtitle: Text, list: TwoColumnMultipleSelectionList) {
+    public init(navigationBar: NavigationBar, footer: Footer, styles: BasicScreenBlock, permission: RequestPermission?, timer: ScreenTimer?, animationEnabled: Bool, useLocalAssetsIfAvailable: Bool, twoColumnMultipleSelectionDescription: String, media: Media? = nil, title: Text, subtitle: Text, list: TwoColumnMultipleSelectionList) {
         self.navigationBar = navigationBar
         self.footer = footer
         self.styles = styles
@@ -33,6 +34,7 @@ public struct ScreenTwoColumnMultipleSelection: Codable, JSONEncodable, Hashable
         self.animationEnabled = animationEnabled
         self.useLocalAssetsIfAvailable = useLocalAssetsIfAvailable
         self.twoColumnMultipleSelectionDescription = twoColumnMultipleSelectionDescription
+        self.media = media
         self.title = title
         self.subtitle = subtitle
         self.list = list
@@ -47,6 +49,7 @@ public struct ScreenTwoColumnMultipleSelection: Codable, JSONEncodable, Hashable
         case animationEnabled
         case useLocalAssetsIfAvailable
         case twoColumnMultipleSelectionDescription
+        case media
         case title
         case subtitle
         case list
@@ -64,6 +67,7 @@ public struct ScreenTwoColumnMultipleSelection: Codable, JSONEncodable, Hashable
         try container.encode(animationEnabled, forKey: .animationEnabled)
         try container.encode(useLocalAssetsIfAvailable, forKey: .useLocalAssetsIfAvailable)
         try container.encode(twoColumnMultipleSelectionDescription, forKey: .twoColumnMultipleSelectionDescription)
+        try container.encodeIfPresent(media, forKey: .media)
         try container.encode(title, forKey: .title)
         try container.encode(subtitle, forKey: .subtitle)
         try container.encode(list, forKey: .list)

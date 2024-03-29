@@ -23,8 +23,7 @@ public struct ScreenBasicPaywall: Codable, JSONEncodable, Hashable {
     public var title: Text
     public var subtitle: Text
     public var divider: Divider?
-    public var image: Image?
-    public var video: Video?
+    public var media: Media?
     public var list: RegularList
     public var loader: Loader?
     /** Purchase flags */
@@ -32,7 +31,7 @@ public struct ScreenBasicPaywall: Codable, JSONEncodable, Hashable {
     public var subscriptions: SubscriptionList
     public var currencyFormat: CurrencyFormatKind
 
-    public init(navigationBar: PaywallNavigationBar, footer: PaywallFooter, styles: ScreenBasicPaywallBlock, permission: RequestPermission?, timer: ScreenTimer?, animationEnabled: Bool, useLocalAssetsIfAvailable: Bool, screenBasicPaywall: String, title: Text, subtitle: Text, divider: Divider? = nil, image: Image? = nil, video: Video? = nil, list: RegularList, loader: Loader? = nil, flags: [PurchaseFlag], subscriptions: SubscriptionList, currencyFormat: CurrencyFormatKind) {
+    public init(navigationBar: PaywallNavigationBar, footer: PaywallFooter, styles: ScreenBasicPaywallBlock, permission: RequestPermission?, timer: ScreenTimer?, animationEnabled: Bool, useLocalAssetsIfAvailable: Bool, screenBasicPaywall: String, title: Text, subtitle: Text, divider: Divider? = nil, media: Media? = nil, list: RegularList, loader: Loader? = nil, flags: [PurchaseFlag], subscriptions: SubscriptionList, currencyFormat: CurrencyFormatKind) {
         self.navigationBar = navigationBar
         self.footer = footer
         self.styles = styles
@@ -44,8 +43,7 @@ public struct ScreenBasicPaywall: Codable, JSONEncodable, Hashable {
         self.title = title
         self.subtitle = subtitle
         self.divider = divider
-        self.image = image
-        self.video = video
+        self.media = media
         self.list = list
         self.loader = loader
         self.flags = flags
@@ -65,8 +63,7 @@ public struct ScreenBasicPaywall: Codable, JSONEncodable, Hashable {
         case title
         case subtitle
         case divider
-        case image
-        case video
+        case media
         case list
         case loader
         case flags
@@ -89,8 +86,7 @@ public struct ScreenBasicPaywall: Codable, JSONEncodable, Hashable {
         try container.encode(title, forKey: .title)
         try container.encode(subtitle, forKey: .subtitle)
         try container.encodeIfPresent(divider, forKey: .divider)
-        try container.encodeIfPresent(image, forKey: .image)
-        try container.encodeIfPresent(video, forKey: .video)
+        try container.encodeIfPresent(media, forKey: .media)
         try container.encode(list, forKey: .list)
         try container.encodeIfPresent(loader, forKey: .loader)
         try container.encode(flags, forKey: .flags)

@@ -23,6 +23,8 @@ public struct LabelBlock: Codable, JSONEncodable, Hashable {
     public var fontWeight: Double?
     /** Color for text */
     public var color: String?
+    /** Alternative color for text */
+    public var alternativeColor: String?
     /** Background color for text block */
     public var backgroundColor: String?
     /** Padding left for container */
@@ -34,13 +36,14 @@ public struct LabelBlock: Codable, JSONEncodable, Hashable {
     /** Padding bottom for container */
     public var paddingBottom: Double?
 
-    public init(textAlign: LabelPosition? = nil, fontFamily: FontFamily? = nil, lineHeight: Double? = nil, fontSize: Double? = nil, fontWeight: Double? = nil, color: String? = nil, backgroundColor: String? = nil, paddingLeft: Double? = nil, paddingRight: Double? = nil, paddingTop: Double? = nil, paddingBottom: Double? = nil) {
+    public init(textAlign: LabelPosition? = nil, fontFamily: FontFamily? = nil, lineHeight: Double? = nil, fontSize: Double? = nil, fontWeight: Double? = nil, color: String? = nil, alternativeColor: String? = nil, backgroundColor: String? = nil, paddingLeft: Double? = nil, paddingRight: Double? = nil, paddingTop: Double? = nil, paddingBottom: Double? = nil) {
         self.textAlign = textAlign
         self.fontFamily = fontFamily
         self.lineHeight = lineHeight
         self.fontSize = fontSize
         self.fontWeight = fontWeight
         self.color = color
+        self.alternativeColor = alternativeColor
         self.backgroundColor = backgroundColor
         self.paddingLeft = paddingLeft
         self.paddingRight = paddingRight
@@ -55,6 +58,7 @@ public struct LabelBlock: Codable, JSONEncodable, Hashable {
         case fontSize
         case fontWeight
         case color
+        case alternativeColor
         case backgroundColor
         case paddingLeft
         case paddingRight
@@ -72,6 +76,7 @@ public struct LabelBlock: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(fontSize, forKey: .fontSize)
         try container.encodeIfPresent(fontWeight, forKey: .fontWeight)
         try container.encodeIfPresent(color, forKey: .color)
+        try container.encodeIfPresent(alternativeColor, forKey: .alternativeColor)
         try container.encodeIfPresent(backgroundColor, forKey: .backgroundColor)
         try container.encodeIfPresent(paddingLeft, forKey: .paddingLeft)
         try container.encodeIfPresent(paddingRight, forKey: .paddingRight)

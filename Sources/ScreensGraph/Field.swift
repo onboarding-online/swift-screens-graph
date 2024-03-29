@@ -15,14 +15,20 @@ public struct Field: Codable, JSONEncodable, Hashable {
 
     public var box: Box
     public var type: FieldType
+    public var subtype: FieldSubtype?
+    public var validationRegex: String?
+    public var errorMessage: BaseText?
     public var placeholder: BaseText
     /** Field value */
     public var value: String
     public var styles: FieldBlock
 
-    public init(box: Box, type: FieldType, placeholder: BaseText, value: String, styles: FieldBlock) {
+    public init(box: Box, type: FieldType, subtype: FieldSubtype? = nil, validationRegex: String? = nil, errorMessage: BaseText? = nil, placeholder: BaseText, value: String, styles: FieldBlock) {
         self.box = box
         self.type = type
+        self.subtype = subtype
+        self.validationRegex = validationRegex
+        self.errorMessage = errorMessage
         self.placeholder = placeholder
         self.value = value
         self.styles = styles
@@ -31,6 +37,9 @@ public struct Field: Codable, JSONEncodable, Hashable {
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case box
         case type
+        case subtype
+        case validationRegex
+        case errorMessage
         case placeholder
         case value
         case styles
@@ -42,6 +51,9 @@ public struct Field: Codable, JSONEncodable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(box, forKey: .box)
         try container.encode(type, forKey: .type)
+        try container.encodeIfPresent(subtype, forKey: .subtype)
+        try container.encodeIfPresent(validationRegex, forKey: .validationRegex)
+        try container.encodeIfPresent(errorMessage, forKey: .errorMessage)
         try container.encode(placeholder, forKey: .placeholder)
         try container.encode(value, forKey: .value)
         try container.encode(styles, forKey: .styles)

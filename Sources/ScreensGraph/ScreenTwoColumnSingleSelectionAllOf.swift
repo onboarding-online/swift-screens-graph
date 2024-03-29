@@ -14,12 +14,14 @@ import AnyCodable
 public struct ScreenTwoColumnSingleSelectionAllOf: Codable, JSONEncodable, Hashable {
 
     public var twoColumnSingleSelectionDescription: String
+    public var media: Media?
     public var title: Text
     public var subtitle: Text
     public var list: TwoColumnSingleSelectionList
 
-    public init(twoColumnSingleSelectionDescription: String, title: Text, subtitle: Text, list: TwoColumnSingleSelectionList) {
+    public init(twoColumnSingleSelectionDescription: String, media: Media? = nil, title: Text, subtitle: Text, list: TwoColumnSingleSelectionList) {
         self.twoColumnSingleSelectionDescription = twoColumnSingleSelectionDescription
+        self.media = media
         self.title = title
         self.subtitle = subtitle
         self.list = list
@@ -27,6 +29,7 @@ public struct ScreenTwoColumnSingleSelectionAllOf: Codable, JSONEncodable, Hasha
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case twoColumnSingleSelectionDescription
+        case media
         case title
         case subtitle
         case list
@@ -37,6 +40,7 @@ public struct ScreenTwoColumnSingleSelectionAllOf: Codable, JSONEncodable, Hasha
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(twoColumnSingleSelectionDescription, forKey: .twoColumnSingleSelectionDescription)
+        try container.encodeIfPresent(media, forKey: .media)
         try container.encode(title, forKey: .title)
         try container.encode(subtitle, forKey: .subtitle)
         try container.encode(list, forKey: .list)

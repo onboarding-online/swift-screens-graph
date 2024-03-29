@@ -22,8 +22,9 @@ public struct ScreenProgressBarTitle: Codable, JSONEncodable, Hashable {
     public var progressBarTitleDescription: String
     public var progressBar: ProgressBar
     public var title: Text
+    public var subtitle: Text?
 
-    public init(navigationBar: NavigationBar, footer: Footer, styles: BasicScreenBlock, permission: RequestPermission?, timer: ScreenTimer?, animationEnabled: Bool, useLocalAssetsIfAvailable: Bool, progressBarTitleDescription: String, progressBar: ProgressBar, title: Text) {
+    public init(navigationBar: NavigationBar, footer: Footer, styles: BasicScreenBlock, permission: RequestPermission?, timer: ScreenTimer?, animationEnabled: Bool, useLocalAssetsIfAvailable: Bool, progressBarTitleDescription: String, progressBar: ProgressBar, title: Text, subtitle: Text? = nil) {
         self.navigationBar = navigationBar
         self.footer = footer
         self.styles = styles
@@ -34,6 +35,7 @@ public struct ScreenProgressBarTitle: Codable, JSONEncodable, Hashable {
         self.progressBarTitleDescription = progressBarTitleDescription
         self.progressBar = progressBar
         self.title = title
+        self.subtitle = subtitle
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -47,6 +49,7 @@ public struct ScreenProgressBarTitle: Codable, JSONEncodable, Hashable {
         case progressBarTitleDescription
         case progressBar
         case title
+        case subtitle
     }
 
     // Encodable protocol methods
@@ -63,6 +66,7 @@ public struct ScreenProgressBarTitle: Codable, JSONEncodable, Hashable {
         try container.encode(progressBarTitleDescription, forKey: .progressBarTitleDescription)
         try container.encode(progressBar, forKey: .progressBar)
         try container.encode(title, forKey: .title)
+        try container.encodeIfPresent(subtitle, forKey: .subtitle)
     }
 }
 

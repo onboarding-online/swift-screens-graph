@@ -19,4 +19,9 @@ public enum SubscriptionListItemType: String, Codable, CaseIterable {
     case subscriptionListItemType3 = "SubscriptionListItemType3"
     case subscriptionListItemType4 = "SubscriptionListItemType4"
     case subscriptionListItemType5 = "SubscriptionListItemType5"
+    case subscriptionListItemType6 = "SubscriptionListItemType6"
+    case subscriptionListItemType7 = "SubscriptionListItemType7"
+    case subscriptionListItemType8 = "SubscriptionListItemType8"
+    case subscriptionListItemType9 = "SubscriptionListItemType9"
+    case subscriptionListItemType10 = "SubscriptionListItemType10"
 }

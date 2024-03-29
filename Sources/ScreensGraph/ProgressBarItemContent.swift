@@ -14,13 +14,22 @@ import AnyCodable
 public struct ProgressBarItemContent: Codable, JSONEncodable, Hashable {
 
     public var title: Text
+    public var subtitle: Text?
+    public var description: Text?
+    public var image: Image?
 
-    public init(title: Text) {
+    public init(title: Text, subtitle: Text? = nil, description: Text? = nil, image: Image? = nil) {
         self.title = title
+        self.subtitle = subtitle
+        self.description = description
+        self.image = image
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case title
+        case subtitle
+        case description
+        case image
     }
 
     // Encodable protocol methods
@@ -28,6 +37,9 @@ public struct ProgressBarItemContent: Codable, JSONEncodable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(title, forKey: .title)
+        try container.encodeIfPresent(subtitle, forKey: .subtitle)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(image, forKey: .image)
     }
 }
 

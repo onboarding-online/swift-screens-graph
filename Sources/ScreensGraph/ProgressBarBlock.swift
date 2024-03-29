@@ -13,37 +13,61 @@ import AnyCodable
 /** Styles for progress bar */
 public struct ProgressBarBlock: Codable, JSONEncodable, Hashable {
 
+    /** width of progress bar */
+    public var width: Double?
+    /** height of progress bar */
+    public var height: Double?
+    /** Height in percentage */
+    public var heightPercentage: Double?
     /** Color for progress bar */
     public var color: String?
-    /** Thickness for progress bar */
-    public var thickness: Double?
     /** Track color */
     public var trackColor: String?
+    /** Fill color */
+    public var fillColor: String?
+    /** Thickness for progress bar */
+    public var thickness: Double?
     /** Track thickness */
     public var trackThickness: Double?
+    public var verticalAlignment: VerticalAlignment?
 
-    public init(color: String? = nil, thickness: Double? = nil, trackColor: String? = nil, trackThickness: Double? = nil) {
+    public init(width: Double? = nil, height: Double? = nil, heightPercentage: Double? = nil, color: String? = nil, trackColor: String? = nil, fillColor: String? = nil, thickness: Double? = nil, trackThickness: Double? = nil, verticalAlignment: VerticalAlignment? = nil) {
+        self.width = width
+        self.height = height
+        self.heightPercentage = heightPercentage
         self.color = color
-        self.thickness = thickness
         self.trackColor = trackColor
+        self.fillColor = fillColor
+        self.thickness = thickness
         self.trackThickness = trackThickness
+        self.verticalAlignment = verticalAlignment
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
+        case width
+        case height
+        case heightPercentage
         case color
-        case thickness
         case trackColor
+        case fillColor
+        case thickness
         case trackThickness
+        case verticalAlignment
     }
 
     // Encodable protocol methods
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(width, forKey: .width)
+        try container.encodeIfPresent(height, forKey: .height)
+        try container.encodeIfPresent(heightPercentage, forKey: .heightPercentage)
         try container.encodeIfPresent(color, forKey: .color)
-        try container.encodeIfPresent(thickness, forKey: .thickness)
         try container.encodeIfPresent(trackColor, forKey: .trackColor)
+        try container.encodeIfPresent(fillColor, forKey: .fillColor)
+        try container.encodeIfPresent(thickness, forKey: .thickness)
         try container.encodeIfPresent(trackThickness, forKey: .trackThickness)
+        try container.encodeIfPresent(verticalAlignment, forKey: .verticalAlignment)
     }
 }
 

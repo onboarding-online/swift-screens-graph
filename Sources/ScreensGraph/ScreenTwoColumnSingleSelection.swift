@@ -20,11 +20,12 @@ public struct ScreenTwoColumnSingleSelection: Codable, JSONEncodable, Hashable {
     public var animationEnabled: Bool
     public var useLocalAssetsIfAvailable: Bool
     public var twoColumnSingleSelectionDescription: String
+    public var media: Media?
     public var title: Text
     public var subtitle: Text
     public var list: TwoColumnSingleSelectionList
 
-    public init(navigationBar: NavigationBar, footer: Footer, styles: BasicScreenBlock, permission: RequestPermission?, timer: ScreenTimer?, animationEnabled: Bool, useLocalAssetsIfAvailable: Bool, twoColumnSingleSelectionDescription: String, title: Text, subtitle: Text, list: TwoColumnSingleSelectionList) {
+    public init(navigationBar: NavigationBar, footer: Footer, styles: BasicScreenBlock, permission: RequestPermission?, timer: ScreenTimer?, animationEnabled: Bool, useLocalAssetsIfAvailable: Bool, twoColumnSingleSelectionDescription: String, media: Media? = nil, title: Text, subtitle: Text, list: TwoColumnSingleSelectionList) {
         self.navigationBar = navigationBar
         self.footer = footer
         self.styles = styles
@@ -33,6 +34,7 @@ public struct ScreenTwoColumnSingleSelection: Codable, JSONEncodable, Hashable {
         self.animationEnabled = animationEnabled
         self.useLocalAssetsIfAvailable = useLocalAssetsIfAvailable
         self.twoColumnSingleSelectionDescription = twoColumnSingleSelectionDescription
+        self.media = media
         self.title = title
         self.subtitle = subtitle
         self.list = list
@@ -47,6 +49,7 @@ public struct ScreenTwoColumnSingleSelection: Codable, JSONEncodable, Hashable {
         case animationEnabled
         case useLocalAssetsIfAvailable
         case twoColumnSingleSelectionDescription
+        case media
         case title
         case subtitle
         case list
@@ -64,6 +67,7 @@ public struct ScreenTwoColumnSingleSelection: Codable, JSONEncodable, Hashable {
         try container.encode(animationEnabled, forKey: .animationEnabled)
         try container.encode(useLocalAssetsIfAvailable, forKey: .useLocalAssetsIfAvailable)
         try container.encode(twoColumnSingleSelectionDescription, forKey: .twoColumnSingleSelectionDescription)
+        try container.encodeIfPresent(media, forKey: .media)
         try container.encode(title, forKey: .title)
         try container.encode(subtitle, forKey: .subtitle)
         try container.encode(list, forKey: .list)

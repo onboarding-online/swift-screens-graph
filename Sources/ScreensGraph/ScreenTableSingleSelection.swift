@@ -20,11 +20,12 @@ public struct ScreenTableSingleSelection: Codable, JSONEncodable, Hashable {
     public var animationEnabled: Bool
     public var useLocalAssetsIfAvailable: Bool
     public var singleSelectionDescription: String
+    public var media: Media?
     public var title: Text
     public var subtitle: Text
     public var list: SingleSelectionList
 
-    public init(navigationBar: NavigationBar, footer: Footer, styles: BasicScreenBlock, permission: RequestPermission?, timer: ScreenTimer?, animationEnabled: Bool, useLocalAssetsIfAvailable: Bool, singleSelectionDescription: String, title: Text, subtitle: Text, list: SingleSelectionList) {
+    public init(navigationBar: NavigationBar, footer: Footer, styles: BasicScreenBlock, permission: RequestPermission?, timer: ScreenTimer?, animationEnabled: Bool, useLocalAssetsIfAvailable: Bool, singleSelectionDescription: String, media: Media? = nil, title: Text, subtitle: Text, list: SingleSelectionList) {
         self.navigationBar = navigationBar
         self.footer = footer
         self.styles = styles
@@ -33,6 +34,7 @@ public struct ScreenTableSingleSelection: Codable, JSONEncodable, Hashable {
         self.animationEnabled = animationEnabled
         self.useLocalAssetsIfAvailable = useLocalAssetsIfAvailable
         self.singleSelectionDescription = singleSelectionDescription
+        self.media = media
         self.title = title
         self.subtitle = subtitle
         self.list = list
@@ -47,6 +49,7 @@ public struct ScreenTableSingleSelection: Codable, JSONEncodable, Hashable {
         case animationEnabled
         case useLocalAssetsIfAvailable
         case singleSelectionDescription
+        case media
         case title
         case subtitle
         case list
@@ -64,6 +67,7 @@ public struct ScreenTableSingleSelection: Codable, JSONEncodable, Hashable {
         try container.encode(animationEnabled, forKey: .animationEnabled)
         try container.encode(useLocalAssetsIfAvailable, forKey: .useLocalAssetsIfAvailable)
         try container.encode(singleSelectionDescription, forKey: .singleSelectionDescription)
+        try container.encodeIfPresent(media, forKey: .media)
         try container.encode(title, forKey: .title)
         try container.encode(subtitle, forKey: .subtitle)
         try container.encode(list, forKey: .list)

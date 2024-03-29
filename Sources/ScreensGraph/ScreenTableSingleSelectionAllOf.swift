@@ -14,12 +14,14 @@ import AnyCodable
 public struct ScreenTableSingleSelectionAllOf: Codable, JSONEncodable, Hashable {
 
     public var singleSelectionDescription: String
+    public var media: Media?
     public var title: Text
     public var subtitle: Text
     public var list: SingleSelectionList
 
-    public init(singleSelectionDescription: String, title: Text, subtitle: Text, list: SingleSelectionList) {
+    public init(singleSelectionDescription: String, media: Media? = nil, title: Text, subtitle: Text, list: SingleSelectionList) {
         self.singleSelectionDescription = singleSelectionDescription
+        self.media = media
         self.title = title
         self.subtitle = subtitle
         self.list = list
@@ -27,6 +29,7 @@ public struct ScreenTableSingleSelectionAllOf: Codable, JSONEncodable, Hashable 
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case singleSelectionDescription
+        case media
         case title
         case subtitle
         case list
@@ -37,6 +40,7 @@ public struct ScreenTableSingleSelectionAllOf: Codable, JSONEncodable, Hashable 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(singleSelectionDescription, forKey: .singleSelectionDescription)
+        try container.encodeIfPresent(media, forKey: .media)
         try container.encode(title, forKey: .title)
         try container.encode(subtitle, forKey: .subtitle)
         try container.encode(list, forKey: .list)
