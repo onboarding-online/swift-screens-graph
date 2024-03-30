@@ -12,25 +12,25 @@ import AnyCodable
 
 /** Media content */
 public enum MediaContent: Codable, JSONEncodable, Hashable {
-    case typeBaseImage(BaseImage)
-    case typeBaseVideo(BaseVideo)
+    case typeMediaImage(MediaImage)
+    case typeMediaVideo(MediaVideo)
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
-        case .typeBaseImage(let value):
+        case .typeMediaImage(let value):
             try container.encode(value)
-        case .typeBaseVideo(let value):
+        case .typeMediaVideo(let value):
             try container.encode(value)
         }
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = try? container.decode(BaseImage.self) {
-            self = .typeBaseImage(value)
-        } else if let value = try? container.decode(BaseVideo.self) {
-            self = .typeBaseVideo(value)
+        if let value = try? container.decode(MediaImage.self) {
+            self = .typeMediaImage(value)
+        } else if let value = try? container.decode(MediaVideo.self) {
+            self = .typeMediaVideo(value)
         } else {
             throw DecodingError.typeMismatch(Self.Type.self, .init(codingPath: decoder.codingPath, debugDescription: "Unable to decode instance of MediaContent"))
         }
