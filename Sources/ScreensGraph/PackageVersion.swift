@@ -1,3 +1,3 @@
 public struct ScreensGraphVersion {
-    public static let value = "1.1.0-alpha.3"
+    public static let value = "1.1.0-alpha.4"
 }
