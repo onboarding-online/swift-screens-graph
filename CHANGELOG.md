@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0-alpha.5](https://github.com/onboarding-online/swift-screens-graph/compare/v1.1.0-alpha.4...v1.1.0-alpha.5) (2024-04-01)
+
+
+### Bug Fixes
+
+* change styles for paywall NavBar, basic Footer and more ([a9c1640](https://github.com/onboarding-online/swift-screens-graph/commit/a9c1640e4b5c639452f14f50316c5f50bad645c9))
+
 ## [1.1.0-alpha.4](https://github.com/onboarding-online/swift-screens-graph/compare/v1.1.0-alpha.3...v1.1.0-alpha.4) (2024-03-30)
 
 
