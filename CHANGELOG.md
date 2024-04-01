@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/onboarding-online/swift-screens-graph/compare/v1.1.0-alpha.5...v1.1.0) (2024-04-01)
+
+
+### Bug Fixes
+
+* release v1.1 ([52f1c34](https://github.com/onboarding-online/swift-screens-graph/commit/52f1c34e2702ab9872dd91cb79ccf657c12463a7))
+
 ## [1.1.0-alpha.5](https://github.com/onboarding-online/swift-screens-graph/compare/v1.1.0-alpha.4...v1.1.0-alpha.5) (2024-04-01)
 
 
