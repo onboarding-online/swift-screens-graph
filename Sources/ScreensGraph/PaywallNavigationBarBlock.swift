@@ -13,18 +13,21 @@ import AnyCodable
 /** Styles for paywall navigation bar */
 public struct PaywallNavigationBarBlock: Codable, JSONEncodable, Hashable {
 
+    public var restoreHorizontalAlignment: RestoreHorizontalAlignment?
     public var closeHorizontalAlignment: CloseHorizontalAlignment?
     public var closeAppearance: CloseAppearance?
     /** Close button appearance visible after timer value in seconds */
     public var closeVisibleAfterTimerValue: Double?
 
-    public init(closeHorizontalAlignment: CloseHorizontalAlignment? = nil, closeAppearance: CloseAppearance? = nil, closeVisibleAfterTimerValue: Double? = nil) {
+    public init(restoreHorizontalAlignment: RestoreHorizontalAlignment? = nil, closeHorizontalAlignment: CloseHorizontalAlignment? = nil, closeAppearance: CloseAppearance? = nil, closeVisibleAfterTimerValue: Double? = nil) {
+        self.restoreHorizontalAlignment = restoreHorizontalAlignment
         self.closeHorizontalAlignment = closeHorizontalAlignment
         self.closeAppearance = closeAppearance
         self.closeVisibleAfterTimerValue = closeVisibleAfterTimerValue
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
+        case restoreHorizontalAlignment
         case closeHorizontalAlignment
         case closeAppearance
         case closeVisibleAfterTimerValue
@@ -34,6 +37,7 @@ public struct PaywallNavigationBarBlock: Codable, JSONEncodable, Hashable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(restoreHorizontalAlignment, forKey: .restoreHorizontalAlignment)
         try container.encodeIfPresent(closeHorizontalAlignment, forKey: .closeHorizontalAlignment)
         try container.encodeIfPresent(closeAppearance, forKey: .closeAppearance)
         try container.encodeIfPresent(closeVisibleAfterTimerValue, forKey: .closeVisibleAfterTimerValue)

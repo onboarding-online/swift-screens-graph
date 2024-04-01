@@ -14,6 +14,7 @@ import AnyCodable
 public struct ButtonBlock: Codable, JSONEncodable, Hashable {
 
     public var visibility: ButtonVisibility?
+    public var movingAnimation: ButtonMovingAnimation?
     /** If true, the input will take up the full width of its container */
     public var fullWidth: Bool?
     /** Background of button */
@@ -37,8 +38,9 @@ public struct ButtonBlock: Codable, JSONEncodable, Hashable {
     /** Height of button */
     public var height: Double?
 
-    public init(visibility: ButtonVisibility? = nil, fullWidth: Bool? = nil, backgroundColor: String? = nil, paddingLeft: Double? = nil, paddingRight: Double? = nil, paddingTop: Double? = nil, paddingBottom: Double? = nil, borderRadius: Double? = nil, borderColor: String? = nil, borderWidth: Double? = nil, width: Double? = nil, height: Double? = nil) {
+    public init(visibility: ButtonVisibility? = nil, movingAnimation: ButtonMovingAnimation? = nil, fullWidth: Bool? = nil, backgroundColor: String? = nil, paddingLeft: Double? = nil, paddingRight: Double? = nil, paddingTop: Double? = nil, paddingBottom: Double? = nil, borderRadius: Double? = nil, borderColor: String? = nil, borderWidth: Double? = nil, width: Double? = nil, height: Double? = nil) {
         self.visibility = visibility
+        self.movingAnimation = movingAnimation
         self.fullWidth = fullWidth
         self.backgroundColor = backgroundColor
         self.paddingLeft = paddingLeft
@@ -54,6 +56,7 @@ public struct ButtonBlock: Codable, JSONEncodable, Hashable {
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case visibility
+        case movingAnimation
         case fullWidth
         case backgroundColor
         case paddingLeft
@@ -72,6 +75,7 @@ public struct ButtonBlock: Codable, JSONEncodable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(visibility, forKey: .visibility)
+        try container.encodeIfPresent(movingAnimation, forKey: .movingAnimation)
         try container.encodeIfPresent(fullWidth, forKey: .fullWidth)
         try container.encodeIfPresent(backgroundColor, forKey: .backgroundColor)
         try container.encodeIfPresent(paddingLeft, forKey: .paddingLeft)

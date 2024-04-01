@@ -20,6 +20,7 @@ public struct ItemTypeSubscription: Codable, JSONEncodable, Hashable {
     public var rightLabelTop: Text
     public var rightLabelBottom: Text
     public var descriptionLabel: Text?
+    public var purchaseButtonLabel: Text?
     public var isSelected: Bool
     public var badge: Badge?
     public var image: Image?
@@ -27,7 +28,7 @@ public struct ItemTypeSubscription: Codable, JSONEncodable, Hashable {
     public var weight: Double
     public var styles: ItemTypeSubscriptionBlock
 
-    public init(subscriptionId: String, checkBox: CheckBox, leftLabelTop: Text, leftLabelBottom: Text, rightLabelTop: Text, rightLabelBottom: Text, descriptionLabel: Text? = nil, isSelected: Bool, badge: Badge? = nil, image: Image? = nil, box: Box, weight: Double, styles: ItemTypeSubscriptionBlock) {
+    public init(subscriptionId: String, checkBox: CheckBox, leftLabelTop: Text, leftLabelBottom: Text, rightLabelTop: Text, rightLabelBottom: Text, descriptionLabel: Text? = nil, purchaseButtonLabel: Text? = nil, isSelected: Bool, badge: Badge? = nil, image: Image? = nil, box: Box, weight: Double, styles: ItemTypeSubscriptionBlock) {
         self.subscriptionId = subscriptionId
         self.checkBox = checkBox
         self.leftLabelTop = leftLabelTop
@@ -35,6 +36,7 @@ public struct ItemTypeSubscription: Codable, JSONEncodable, Hashable {
         self.rightLabelTop = rightLabelTop
         self.rightLabelBottom = rightLabelBottom
         self.descriptionLabel = descriptionLabel
+        self.purchaseButtonLabel = purchaseButtonLabel
         self.isSelected = isSelected
         self.badge = badge
         self.image = image
@@ -51,6 +53,7 @@ public struct ItemTypeSubscription: Codable, JSONEncodable, Hashable {
         case rightLabelTop
         case rightLabelBottom
         case descriptionLabel
+        case purchaseButtonLabel
         case isSelected
         case badge
         case image
@@ -70,6 +73,7 @@ public struct ItemTypeSubscription: Codable, JSONEncodable, Hashable {
         try container.encode(rightLabelTop, forKey: .rightLabelTop)
         try container.encode(rightLabelBottom, forKey: .rightLabelBottom)
         try container.encodeIfPresent(descriptionLabel, forKey: .descriptionLabel)
+        try container.encodeIfPresent(purchaseButtonLabel, forKey: .purchaseButtonLabel)
         try container.encode(isSelected, forKey: .isSelected)
         try container.encodeIfPresent(badge, forKey: .badge)
         try container.encodeIfPresent(image, forKey: .image)

@@ -17,17 +17,33 @@ public struct PaywallFooterBlock: Codable, JSONEncodable, Hashable {
     /** Background color for footer */
     public var backgroundColor: String?
     public var opacity: Double?
+    /** Padding left for container */
+    public var paddingLeft: Double?
+    /** Padding right for container */
+    public var paddingRight: Double?
+    /** Padding top for container */
+    public var paddingTop: Double?
+    /** Padding bottom for container */
+    public var paddingBottom: Double?
 
-    public init(elementsOrder: PaywallFooterElementsOrder? = nil, backgroundColor: String? = nil, opacity: Double? = nil) {
+    public init(elementsOrder: PaywallFooterElementsOrder? = nil, backgroundColor: String? = nil, opacity: Double? = nil, paddingLeft: Double? = nil, paddingRight: Double? = nil, paddingTop: Double? = nil, paddingBottom: Double? = nil) {
         self.elementsOrder = elementsOrder
         self.backgroundColor = backgroundColor
         self.opacity = opacity
+        self.paddingLeft = paddingLeft
+        self.paddingRight = paddingRight
+        self.paddingTop = paddingTop
+        self.paddingBottom = paddingBottom
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case elementsOrder
         case backgroundColor
         case opacity
+        case paddingLeft
+        case paddingRight
+        case paddingTop
+        case paddingBottom
     }
 
     // Encodable protocol methods
@@ -37,6 +53,10 @@ public struct PaywallFooterBlock: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(elementsOrder, forKey: .elementsOrder)
         try container.encodeIfPresent(backgroundColor, forKey: .backgroundColor)
         try container.encodeIfPresent(opacity, forKey: .opacity)
+        try container.encodeIfPresent(paddingLeft, forKey: .paddingLeft)
+        try container.encodeIfPresent(paddingRight, forKey: .paddingRight)
+        try container.encodeIfPresent(paddingTop, forKey: .paddingTop)
+        try container.encodeIfPresent(paddingBottom, forKey: .paddingBottom)
     }
 }
 

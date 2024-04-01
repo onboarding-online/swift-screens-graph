@@ -15,6 +15,7 @@ public struct PaywallNavigationBar: Codable, JSONEncodable, Hashable {
 
     public var paywallNavigationBar: String
     public var close: Button?
+    public var restore: Text?
     public var styles: PaywallNavigationBarBlock
     public var back: Button?
     public var skip: Button?
@@ -22,9 +23,10 @@ public struct PaywallNavigationBar: Codable, JSONEncodable, Hashable {
     public var pageIndicatorKind: PageIndicatorKind?
     public var dashesPageIndicator: DashesPageIndicator?
 
-    public init(paywallNavigationBar: String, close: Button? = nil, styles: PaywallNavigationBarBlock, back: Button? = nil, skip: Button? = nil, pageIndicator: PageIndicator? = nil, pageIndicatorKind: PageIndicatorKind? = nil, dashesPageIndicator: DashesPageIndicator? = nil) {
+    public init(paywallNavigationBar: String, close: Button? = nil, restore: Text? = nil, styles: PaywallNavigationBarBlock, back: Button? = nil, skip: Button? = nil, pageIndicator: PageIndicator? = nil, pageIndicatorKind: PageIndicatorKind? = nil, dashesPageIndicator: DashesPageIndicator? = nil) {
         self.paywallNavigationBar = paywallNavigationBar
         self.close = close
+        self.restore = restore
         self.styles = styles
         self.back = back
         self.skip = skip
@@ -36,6 +38,7 @@ public struct PaywallNavigationBar: Codable, JSONEncodable, Hashable {
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case paywallNavigationBar
         case close
+        case restore
         case styles
         case back
         case skip
@@ -50,6 +53,7 @@ public struct PaywallNavigationBar: Codable, JSONEncodable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(paywallNavigationBar, forKey: .paywallNavigationBar)
         try container.encodeIfPresent(close, forKey: .close)
+        try container.encodeIfPresent(restore, forKey: .restore)
         try container.encode(styles, forKey: .styles)
         try container.encodeIfPresent(back, forKey: .back)
         try container.encodeIfPresent(skip, forKey: .skip)
